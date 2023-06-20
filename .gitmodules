@@ -1,0 +1,3 @@
+[submodule "hardware/witns_kicad_lib"]
+	path = hardware/witns_kicad_lib
+	url = git@github.com:lfiack/witns_kicad_lib.git
