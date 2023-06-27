@@ -6,3 +6,8 @@ This project uses a submodule for the KiCAD library. To get it properly, use the
 ```
 git clone --recursive git@github.com:lfiack/witns_wvtbl.git
 ```
+
+If you forgot the `--recursive` option (as I do quite often), you can type the following command :
+```
+git submodule update --init --recursive
+```

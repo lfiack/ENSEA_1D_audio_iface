@@ -807,7 +807,7 @@
   (symbol (lib_id "power:GND") (at 144.78 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 30284a3e-38a9-457a-b739-cf846418ca12)
-    (property "Reference" "#PWR0401" (at 144.78 118.11 0)
+    (property "Reference" "#PWR0402" (at 144.78 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 144.78 115.57 0)
@@ -823,7 +823,7 @@
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/f8f73879-1c97-4949-a7e6-1a88ad2aef24"
-          (reference "#PWR0401") (unit 1)
+          (reference "#PWR0402") (unit 1)
         )
       )
       (project "test_SGTL5000"
@@ -881,7 +881,7 @@
   (symbol (lib_name "GND_1") (lib_id "power:GND") (at 107.95 104.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bd119e71-16fd-4d81-8c42-86a18776db68)
-    (property "Reference" "#PWR0403" (at 107.95 110.49 0)
+    (property "Reference" "#PWR0401" (at 107.95 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 107.95 107.95 0)
@@ -897,7 +897,7 @@
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/f8f73879-1c97-4949-a7e6-1a88ad2aef24"
-          (reference "#PWR0403") (unit 1)
+          (reference "#PWR0401") (unit 1)
         )
       )
     )
@@ -906,7 +906,7 @@
   (symbol (lib_id "power:GND") (at 167.64 80.645 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ec804141-0108-4c6d-b2ae-8f8eaa4ab5cb)
-    (property "Reference" "#PWR0402" (at 167.64 86.995 0)
+    (property "Reference" "#PWR0403" (at 167.64 86.995 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 167.64 85.09 0)
@@ -922,7 +922,7 @@
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/f8f73879-1c97-4949-a7e6-1a88ad2aef24"
-          (reference "#PWR0402") (unit 1)
+          (reference "#PWR0403") (unit 1)
         )
       )
       (project "test_SGTL5000"

@@ -483,6 +483,10 @@
     [
       "f8f73879-1c97-4949-a7e6-1a88ad2aef24",
       "USB"
+    ],
+    [
+      "6e38b2b5-8500-480d-b36b-6cc6ba469971",
+      "VU METER"
     ]
   ],
   "text_variables": {}
