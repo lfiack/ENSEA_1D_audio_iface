@@ -896,6 +896,71 @@
     (uuid fb1a24f1-7844-4fbb-8ef8-3aa8a2ae7063)
   )
 
+  (label "GPA1" (at 148.59 104.14 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 01731831-8f4c-4c54-a8d6-e94557343d15)
+  )
+  (label "GPB4" (at 148.59 88.9 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 0f0546f0-d5c8-4667-9ab1-0a517bae0e6c)
+  )
+  (label "GPA3" (at 148.59 109.22 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 15a26ac7-d53b-45f6-8621-65872e95bc73)
+  )
+  (label "GPA5" (at 152.4 120.65 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 19285c01-a5f9-4d82-98a4-a203bd6c492c)
+  )
+  (label "GPB1" (at 153.67 73.66 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2742f88e-b5cb-4781-a161-04a137f695fb)
+  )
+  (label "GPA0" (at 148.59 101.6 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 469db231-27db-40e2-b0e2-f356ee0038d1)
+  )
+  (label "GPA4" (at 148.59 111.76 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 5448392f-0996-4109-9412-d02b95346487)
+  )
+  (label "GPB6" (at 148.59 93.98 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 5523d8f2-7c99-4ca5-9ad0-ac310bfb7379)
+  )
+  (label "GPA7" (at 152.3679 128.27 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 5bdd9a8d-df42-406d-9c96-41ff18473f75)
+  )
+  (label "GPB0" (at 153.67 69.85 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 6786403d-07a7-4a48-8b8f-621b2ffa796f)
+  )
+  (label "GPB5" (at 148.59 91.44 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 6fc10705-c8d1-476f-8da7-b17d696fcd5d)
+  )
+  (label "GPB3" (at 153.67 81.28 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 72f05629-fac5-4c74-99c2-0d4014f79fbb)
+  )
+  (label "GPB2" (at 153.67 77.47 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 766d011f-137d-4c39-815a-128cd8346f3c)
+  )
+  (label "GPA2" (at 148.59 106.68 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid a295c54e-797f-4ef0-b382-9c27925e88ae)
+  )
+  (label "GPB7" (at 148.59 96.52 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid a94fc891-45c9-48b2-be4d-ad13f8136c1c)
+  )
+  (label "GPA6" (at 152.4 124.46 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid d44a1e86-68da-43ac-88c2-55793bf9031d)
+  )
+
   (hierarchical_label "VU_nRESET" (shape input) (at 111.76 101.6 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 2cff933f-72c1-4a9e-907b-31df8f74dbfa)
@@ -1010,8 +1075,8 @@
     (property "Datasheet" "~" (at 163.83 128.27 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 8eb633a7-2e5d-4f1b-8ef2-62bf9b947351))
-    (pin "2" (uuid e604d50b-fcf7-47c0-a217-e693a1c0ac93))
+    (pin "1" (uuid cf588cff-63f4-45b0-abe5-84246c85d83a))
+    (pin "2" (uuid aa31c9ca-7b89-42e7-9131-1c05806bb0dd))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1062,8 +1127,8 @@
     (property "Datasheet" "~" (at 163.83 120.65 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ed79aacc-290c-4db8-9786-76745a0c8858))
-    (pin "2" (uuid d4989e9f-352f-4265-89b9-48d735f4724c))
+    (pin "1" (uuid 471eb889-5b4d-4cdc-9c6d-7c8b7e685128))
+    (pin "2" (uuid aca84d2f-7f09-4b4d-a348-35f4a376e2a8))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1088,8 +1153,8 @@
     (property "Datasheet" "~" (at 163.83 101.6 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3bdec2ac-d00a-4fae-bb70-c2b1c8de7e3d))
-    (pin "2" (uuid 7faa2d96-feb6-4137-9c4d-5e60f75f7d15))
+    (pin "1" (uuid 357ed810-3c1f-4323-9ef9-bb063899372a))
+    (pin "2" (uuid 7eafec9d-6a85-46c7-90da-48434c154054))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1217,8 +1282,8 @@
     (property "Datasheet" "~" (at 163.83 124.46 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 8f51b23d-e973-4a5b-869b-661467a29dd8))
-    (pin "2" (uuid ab563f47-2dec-443a-b3ee-bf4014745f3a))
+    (pin "1" (uuid e8bc9bd0-2600-4ab8-a0f2-452d0dd95973))
+    (pin "2" (uuid 7709d95b-ca7d-437d-985d-c9eff76eadd8))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1243,8 +1308,8 @@
     (property "Datasheet" "~" (at 180.34 113.03 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 655400ce-fc94-4779-9d7d-8540ca82467c))
-    (pin "2" (uuid c4fac35d-7afc-42d9-9d5b-6aafe2119fef))
+    (pin "1" (uuid 8eb2cff6-017a-4f1d-8cb5-a989c786b646))
+    (pin "2" (uuid 7c99348c-b39b-4d6d-a0e9-58643535853b))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1373,8 +1438,8 @@
     (property "Datasheet" "~" (at 163.83 105.41 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 6f66c5ec-1d0d-4ff9-8432-135e0f7e7a03))
-    (pin "2" (uuid c4bb32da-6dac-43e6-8ad0-b8abad23bccd))
+    (pin "1" (uuid bfa59755-87dc-4b3a-b2bd-66c3bbc5df2b))
+    (pin "2" (uuid 5f661894-e386-482a-9f69-940b4800217d))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1453,8 +1518,8 @@
     (property "Datasheet" "~" (at 163.83 116.84 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 70f4edd0-4715-4e43-a053-29bc13e07d04))
-    (pin "2" (uuid 5ee43bb1-edc8-48d4-b4b1-81a22d8f6430))
+    (pin "1" (uuid 17251469-1f40-41a9-9de0-6235e52431f7))
+    (pin "2" (uuid 6077df5a-c352-424e-94c5-779abeb4fc71))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1505,8 +1570,8 @@
     (property "Datasheet" "~" (at 163.83 109.22 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e5e1bb54-3725-4188-8476-a8c323365f37))
-    (pin "2" (uuid f0dcb355-8010-4f54-96ea-08edbed92565))
+    (pin "1" (uuid 41b8783a-0394-4df9-9b91-381a9510aa2a))
+    (pin "2" (uuid 98c7faad-fcd3-43c4-b5b1-4cb9b7896f2f))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1637,8 +1702,8 @@
     (property "Datasheet" "~" (at 163.83 113.03 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 671a14f2-83f9-4f8c-8d89-2d1e59912e0e))
-    (pin "2" (uuid 39743742-3127-4394-948d-1aec5234bb6b))
+    (pin "1" (uuid 489cb408-a7c7-4403-8169-960a01672b76))
+    (pin "2" (uuid 4fe2c101-5a27-4d6e-90ec-6df269125566))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1714,8 +1779,8 @@
     (property "Datasheet" "~" (at 180.34 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 97a4ac32-fd9a-48a0-b0db-7f1bbd4dbe3d))
-    (pin "2" (uuid 19571dd9-b634-4706-9b7e-f16c98994a56))
+    (pin "1" (uuid a4f3660e-b0e2-4196-9429-5ce7516b8173))
+    (pin "2" (uuid dd82e3a8-280d-4f37-812c-f28edea1b345))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1792,8 +1857,8 @@
     (property "Datasheet" "~" (at 180.34 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 98b77a38-e03d-49c8-8878-1e353c6dc457))
-    (pin "2" (uuid c20638cd-08e5-4f5d-8e6a-3749d73b966c))
+    (pin "1" (uuid 658121e6-2fb9-45c2-b4cd-f315252dc37f))
+    (pin "2" (uuid bd6103e0-f727-4b79-8b19-c3bc04d9e37c))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1846,8 +1911,8 @@
     (property "Datasheet" "~" (at 180.34 120.65 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid de32df15-9609-4188-953a-464016811e90))
-    (pin "2" (uuid e859f117-e475-4dac-a317-74ca3600a484))
+    (pin "1" (uuid 2de1a8d5-96b2-4c15-8987-6784576df8f0))
+    (pin "2" (uuid e38db9a4-802c-4382-9598-77ad137cf86c))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1872,8 +1937,8 @@
     (property "Datasheet" "~" (at 180.34 116.84 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 87445cb0-11a1-49b8-936f-710378c1796a))
-    (pin "2" (uuid 04d09454-dd85-4735-9dcb-526d59a7076a))
+    (pin "1" (uuid c41e4244-0d1a-4eb5-bb1d-a3e72714f781))
+    (pin "2" (uuid 62a213e3-e69e-4257-b752-146e4428ed26))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1898,8 +1963,8 @@
     (property "Datasheet" "~" (at 180.34 109.22 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 16039d68-17e9-480f-bd33-a5e0abfaa79d))
-    (pin "2" (uuid 141cf2e1-7689-4906-ae12-014d327681b7))
+    (pin "1" (uuid d89b401e-3432-491d-b41d-f3be84719e93))
+    (pin "2" (uuid e7c45961-6f86-41c0-a4fb-e201c6f37697))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1924,8 +1989,8 @@
     (property "Datasheet" "~" (at 180.34 105.41 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 89be3c67-c455-4461-a243-69f05561ec4a))
-    (pin "2" (uuid e74c069e-c3c1-4c09-bdb8-ff44126944e3))
+    (pin "1" (uuid a25f9a79-1aba-45e2-817e-d35e7f06f9dc))
+    (pin "2" (uuid 49fd3a77-2b58-48f5-92fd-9a28df58ae0e))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
@@ -1950,8 +2015,8 @@
     (property "Datasheet" "~" (at 180.34 128.27 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid a40a84a8-8846-40b9-b50b-548ddde2b348))
-    (pin "2" (uuid 95bd2134-9b25-443f-9896-a8fed20d7092))
+    (pin "1" (uuid 1f8a816c-21e3-4c09-9f37-da546ca6d094))
+    (pin "2" (uuid b48335c4-7b0a-4505-8621-741f8df61207))
     (instances
       (project "audio_iface"
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9/6e38b2b5-8500-480d-b36b-6cc6ba469971"
