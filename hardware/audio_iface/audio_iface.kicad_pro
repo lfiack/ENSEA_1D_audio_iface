@@ -55,7 +55,12 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "silk_over_copper|35812167|83622326|b9abb527-abb5-4506-860d-457995fef12f|00000000-0000-0000-0000-000000000000",
+        "silk_overlap|35332381|87060000|476902fe-2f3a-4c15-a5cf-bde28e6908dc|a2220d3b-ccc6-4baa-9f84-c5bb02fc4eec",
+        "silk_overlap|35880000|83453641|1afd91af-44ac-47b8-89a8-73bbe1df1682|b9abb527-abb5-4506-860d-457995fef12f",
+        "silk_overlap|37008571|87060000|efb56b99-21d2-401f-a3af-3bc33289bad5|a2220d3b-ccc6-4baa-9f84-c5bb02fc4eec"
+      ],
       "meta": {
         "version": 2
       },
@@ -96,7 +101,7 @@
         "silk_overlap": "warning",
         "skew_out_of_range": "error",
         "solder_mask_bridge": "error",
-        "starved_thermal": "error",
+        "starved_thermal": "ignore",
         "text_height": "warning",
         "text_thickness": "warning",
         "through_hole_pad_without_hole": "error",
@@ -394,7 +399,7 @@
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
       "label_dangling": "error",
-      "lib_symbol_issues": "warning",
+      "lib_symbol_issues": "ignore",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
       "missing_power_pin": "error",
@@ -405,10 +410,10 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
-      "simulation_model_issue": "error",
+      "simulation_model_issue": "ignore",
       "unannotated": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",

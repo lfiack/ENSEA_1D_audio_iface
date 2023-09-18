@@ -1,0 +1,41 @@
+Designator,Comment,Footprint,LCSC Part #
+"R301, R401, R402",5.1k,Resistor_SMD:R_0402_1005Metric,C2906948
+"D506, D507, D514, D515",ORANGE,LED_SMD:LED_0603_1608Metric,C965801
+U301,SGTL5000XNAA3,Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.6x3.6mm,C511764
+J303,HP,Connector_Audio:Jack_3.5mm_PJ320D_Horizontal,C431535
+J302,LINEOUT,Connector_Audio:Jack_3.5mm_PJ320D_Horizontal,C431535
+J301,LINEIN,Connector_Audio:Jack_3.5mm_PJ320D_Horizontal,C431535
+J401,USB_C_Receptacle_USB2.0,Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12,C165948
+U501,MCP23S17-E/SO,Package_SO:SOIC-28W_7.5x17.9mm_P1.27mm,C145413
+"D501, D502, D503, D504, D505, D509, D510, D511, D512, D513",GREEN,LED_SMD:LED_0603_1608Metric,C72043
+"C301, C302, C304, C309, C310, C311, C312",1uF,Capacitor_SMD:C_0603_1608Metric,C15849
+U401,USBLC6-2SC6,Package_TO_SOT_SMD:SOT-23-6,C7519
+"D508, D516",RED,LED_SMD:LED_0603_1608Metric,C2286
+"C303, C305, C306, C307, C308, C501",100nF,Capacitor_SMD:C_0402_1005Metric,C1525
+U201,NUCLEO_L476RG,WITNS:ST_NUCLEO_64,
+TP307,HP GND,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+"TP303, TP305, TP308",L,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+"TP302, TP304, TP306",R,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP301,MIC,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP205,GND,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP204,TX,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP203,RX,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP202,+3.3VA,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP201,+3.3V,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP112,SDA,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP111,SCL,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP110,DOUT,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP109,DIN,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP108,LRCLK,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP107,SCLK,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP106,MCLK,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP105,nCS,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP104,SCK,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP103,MOSI,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP102,MISO,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+TP101,nRESET,Connector_Pin:Pin_D1.1mm_L8.5mm_W2.5mm_FlatFork,
+"R506, R507, R508, R514, R515, R516",680,Resistor_SMD:R_0603_1608Metric,
+"R501, R502, R503, R504, R505, R509, R510, R511, R512, R513",560,Resistor_SMD:R_0603_1608Metric,
+"R302, R303",1.5k,Resistor_SMD:R_0402_1005Metric,
+MK301,Microphone,WITNS:Electret_ABM-713-RC,
+J201,UART,Connector_JST:JST_XH_S3B-XH-A_1x03_P2.50mm_Horizontal,

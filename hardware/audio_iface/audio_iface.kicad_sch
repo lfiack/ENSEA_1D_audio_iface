@@ -254,7 +254,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP107") (unit 1)
+          (reference "TP112") (unit 1)
         )
       )
     )
@@ -282,7 +282,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP101") (unit 1)
+          (reference "TP106") (unit 1)
         )
       )
     )
@@ -310,7 +310,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP106") (unit 1)
+          (reference "TP111") (unit 1)
         )
       )
     )
@@ -338,7 +338,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP104") (unit 1)
+          (reference "TP109") (unit 1)
         )
       )
     )
@@ -366,7 +366,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP109") (unit 1)
+          (reference "TP102") (unit 1)
         )
       )
     )
@@ -394,7 +394,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP112") (unit 1)
+          (reference "TP105") (unit 1)
         )
       )
     )
@@ -422,7 +422,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP110") (unit 1)
+          (reference "TP103") (unit 1)
         )
       )
     )
@@ -450,7 +450,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP111") (unit 1)
+          (reference "TP104") (unit 1)
         )
       )
     )
@@ -478,7 +478,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP103") (unit 1)
+          (reference "TP108") (unit 1)
         )
       )
     )
@@ -506,7 +506,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP108") (unit 1)
+          (reference "TP101") (unit 1)
         )
       )
     )
@@ -534,7 +534,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP105") (unit 1)
+          (reference "TP110") (unit 1)
         )
       )
     )
@@ -562,7 +562,7 @@
           (reference "TP301") (unit 1)
         )
         (path "/84adbf2e-65c7-4710-86f9-725cae0256c9"
-          (reference "TP102") (unit 1)
+          (reference "TP107") (unit 1)
         )
       )
     )
@@ -741,10 +741,6 @@
     )
     (property "Field2" "" (at 52.07 57.15 0)
       (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "USBC_VBUS" input (at 91.44 59.69 0)
-      (effects (font (size 1.27 1.27)) (justify right))
-      (uuid 7baffd2f-e61d-482a-9fac-47ce59e866ab)
     )
     (pin "USB_D+" input (at 91.44 64.77 0)
       (effects (font (size 1.27 1.27)) (justify right))
