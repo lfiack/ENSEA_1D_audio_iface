@@ -74,3 +74,48 @@ int vu_led(h_vu_t * h_vu, uint8_t port, uint8_t led, uint8_t state)
 
 	return 0;
 }
+
+int vu_blink(h_vu_t * h_vu)
+{
+	for (int j = 0 ; j < 2 ; j++)
+	{
+		for (int i = 0 ; i < 8 ; i++)
+		{
+			vu_led(h_vu, VU_PORTA, i, 1);
+			HAL_Delay(10);
+		}
+		for (int i = 0 ; i < 8 ; i++)
+		{
+			vu_led(h_vu, VU_PORTB, i, 1);
+			HAL_Delay(10);
+		}
+
+		HAL_Delay(50);
+
+		for (int i = 0 ; i < 8 ; i++)
+		{
+			vu_led(h_vu, VU_PORTA, i, 0);
+			HAL_Delay(10);
+		}
+		for (int i = 0 ; i < 8 ; i++)
+		{
+			vu_led(h_vu, VU_PORTB, i, 0);
+			HAL_Delay(10);
+		}
+
+		HAL_Delay(50);
+	}
+
+	return 0;
+}
+
+void vu_blink_red(h_vu_t * h_vu)
+{
+	for (int i = 0 ; i < 7 ; i++)
+	{
+		vu_led(h_vu, VU_PORTA, 7, 0);
+		vu_led(h_vu, VU_PORTB, 7, 0);
+	}
+
+	vu_led(h_vu, VU_PORTA, 7, 1);
+}
