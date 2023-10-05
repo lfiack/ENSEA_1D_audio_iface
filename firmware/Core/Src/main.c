@@ -121,11 +121,49 @@ int main(void)
 	vu_init(&h_vu, &hspi3);
 	vu_blink(&h_vu);
 
+	/**
+	 * Configure SYS_FS clock to 48 kHz
+	 * Configure MCLK_FREQ to 256*Fs = 12288kHz
+	 * PLLSAI1P = 12235.294kHz
+	 * FS = PLLSAI1P / 256 = 47.79MHz
+	 */
+
+	// Il faudrait trouver une solution pour sortir une clock sans démarrer de transmit...
+
+	/**
+	 * Pour faire passer l'I2S dans le DAP (en vrai on s'en fout du DAP)
+	 * SSS_CTRL->DAP_SELECT to 0x1 (selects I2S_IN)
+	 * SSS_CTRL->DAC_SELECT to 0x3 (selects DAP output)
+	 *
+	 * On commence par un test I2S -> DAC Line output
+	 * On ignore donc la partie "ANALOG INPUT BLOCK"
+	 * Et on commence par "ANALOG OUTPUTS"
+	 * On ne s'intéresse pas non plus à la sortie Headphone
+	 *
+	 * Routage + gain analogique :
+	 * CHIP_DAC_VOL
+	 * CHIP_LINE_OUT_VOL
+	 * CHIP_ANA_CTRL->MUTE_LO
+	 *
+	 * Digital input :
+	 * CHIP_I2S_CTRL
+	 * CHIP_I2S_CTRL->LRPOL
+	 * I2S_LRCLK et I2S_SCLK en slave (c'est le STM32 le Master)
+	 * -> Synchrone vis à vis de SYS_MCLK, ça devrait être le cas dans le SAI
+	 *
+	 */
+
+
 	// Starts SAI to hopefully get MCLK
-	if (HAL_SAI_Transmit_DMA(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH) != HAL_OK)
-	{
-		Error_Handler();
-	}
+//	if (HAL_SAI_Transmit_DMA(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH) != HAL_OK)
+//	{
+//		Error_Handler();
+//	}
+
+//	HAL_SAI_Transmit(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH, HAL_MAX_DELAY);
+
+	// Starts MCLK but not the LR clock and other signals
+	__HAL_SAI_ENABLE(&hsai_BlockA2);
 
 	/**
 	 * For the 32 QFN version of the SGTL5000, the I2C device
@@ -165,25 +203,31 @@ int main(void)
 	 * 0xA0HH (0xHH - revision number)
 	 */
 
-	HAL_StatusTypeDef ret;
-	ret = HAL_I2C_Mem_Read (
-			&hi2c2,
-			DevAddress,
-			MemAddress,
-			MemAddSize,
-			pData,
-			Size,
-			HAL_MAX_DELAY
-	);
-
-	if (ret != HAL_OK)
+	for(;;)
 	{
-		// Pour l'instant on a un ACK Failure
-		printf("HAL_I2C_Mem_Read error\r\n");
-		Error_Handler();
-	}
+		static int try = 0;
+		HAL_StatusTypeDef ret;
+		ret = HAL_I2C_Mem_Read (
+				&hi2c2,
+				DevAddress,
+				MemAddress,
+				MemAddSize,
+				pData,
+				Size,
+				100
+		);
 
-	printf("pData[0] = 0x%02X, pData[1] = 0x%02X\r\n", pData[0], pData[1]);
+		if (ret != HAL_OK)
+		{
+			// Pour l'instant on a un ACK Failure -> C'est réglé!
+			printf("HAL_I2C_Mem_Read error\r\n");
+			Error_Handler();
+		}
+
+		printf("try %d : pData[0] = 0x%02X, pData[1] = 0x%02X\r\n", try++, pData[0], pData[1]);
+
+		HAL_Delay(100);
+	}
 
 	while (1)
 	{
@@ -273,8 +317,8 @@ void PeriphCommonClock_Config(void)
   PeriphClkInit.Sai2ClockSelection = RCC_SAI2CLKSOURCE_PLLSAI1;
   PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_HSI;
   PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
-  PeriphClkInit.PLLSAI1.PLLSAI1N = 8;
-  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
+  PeriphClkInit.PLLSAI1.PLLSAI1N = 13;
+  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV17;
   PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
   PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
   PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_SAI1CLK;
