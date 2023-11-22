@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "sgtl5000.h"
 
 #include "vu_meter.h"
 /* USER CODE END Includes */
@@ -69,6 +70,26 @@ int _write(int file, char *ptr, int len)
 	HAL_UART_Transmit(&huart2, (uint8_t*) ptr, len, HAL_MAX_DELAY);
 
 	return len;
+}
+
+static int cplt_counter = 0;
+void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	if (SAI2_Block_A == hsai->Instance)
+	{
+		cplt_counter++;
+		// TODO Temp juste pour voir
+		HAL_SAI_DMAStop(&hsai_BlockA2);
+	}
+}
+
+static int half_cplt_counter = 0;
+void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	if (SAI2_Block_A == hsai->Instance)
+	{
+		half_cplt_counter++;
+	}
 }
 /* USER CODE END 0 */
 
@@ -155,12 +176,12 @@ int main(void)
 
 
 	// Starts SAI to hopefully get MCLK
-//	if (HAL_SAI_Transmit_DMA(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH) != HAL_OK)
-//	{
-//		Error_Handler();
-//	}
+	//	if (HAL_SAI_Transmit_DMA(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH) != HAL_OK)
+	//	{
+	//		Error_Handler();
+	//	}
 
-//	HAL_SAI_Transmit(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH, HAL_MAX_DELAY);
+	//	HAL_SAI_Transmit(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH, HAL_MAX_DELAY);
 
 	// Starts MCLK but not the LR clock and other signals
 	__HAL_SAI_ENABLE(&hsai_BlockA2);
@@ -180,11 +201,8 @@ int main(void)
 	 * Cela dit, il rajoute le 1 pour la lecture
 	 */
 
-	uint16_t DevAddress = 0x14;
-	uint16_t MemAddress = 0x0000;		// SGTL wants MSB First (ST sends MSB first!)
-	uint16_t MemAddSize = I2C_MEMADD_SIZE_16BIT;
-	uint8_t pData[2];
-	uint16_t Size = 2;
+	uint16_t sgtl_address = 0x14;
+	uint16_t p_data;
 
 	/**
 	 * Example I2C read
@@ -203,31 +221,43 @@ int main(void)
 	 * 0xA0HH (0xHH - revision number)
 	 */
 
-	for(;;)
+	h_sgtl5000_t h_sgtl5000;
+	h_sgtl5000.hi2c = &hi2c2;
+	h_sgtl5000.dev_address = sgtl_address;
+
+	HAL_StatusTypeDef ret;
+	ret = sgtl5000_i2c_read_register(&h_sgtl5000, SGTL5000_CHIP_ID, &p_data);
+
+	if (ret != HAL_OK)
 	{
-		static int try = 0;
-		HAL_StatusTypeDef ret;
-		ret = HAL_I2C_Mem_Read (
-				&hi2c2,
-				DevAddress,
-				MemAddress,
-				MemAddSize,
-				pData,
-				Size,
-				100
-		);
-
-		if (ret != HAL_OK)
-		{
-			// Pour l'instant on a un ACK Failure -> C'est réglé!
-			printf("HAL_I2C_Mem_Read error\r\n");
-			Error_Handler();
-		}
-
-		printf("try %d : pData[0] = 0x%02X, pData[1] = 0x%02X\r\n", try++, pData[0], pData[1]);
-
-		HAL_Delay(100);
+		// Pour l'instant on a un ACK Failure -> C'est réglé!
+		printf("HAL_I2C_Mem_Read error\r\n");
+		Error_Handler();
 	}
+
+	printf("p_data = 0x%04X\r\n", p_data);
+
+	HAL_Delay(100);
+
+#define SAI_TX_BUFFER_LENGTH (48*2)
+	static uint16_t sai_tx_buffer[SAI_TX_BUFFER_LENGTH];
+
+	for (int i = 0 ; i < SAI_TX_BUFFER_LENGTH ; i++)
+	{
+		// Generate a sawtooth at 1kHz
+		sai_tx_buffer[i] = i * (0xFFFF/SAI_TX_BUFFER_LENGTH);
+	}
+
+	printf("Starting SAI...\r\n");
+	// Last parameter is the number of DMA CYCLES (here a cycle is 16 bits/2Bytes)
+	HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*) sai_tx_buffer, SAI_TX_BUFFER_LENGTH);
+	/*
+	 * Channels are interleaved in the buffer
+	 * Bit LR indicate Left/Right Channel
+	 * LSB of right channel is presented when LR indicate Left
+	 * Same goes for left channel
+	 * (SGTL DIN is shifted by 1 bit on the right on the oscilloscope, it's normal for an SAI apparently)
+	 */
 
 	while (1)
 	{
