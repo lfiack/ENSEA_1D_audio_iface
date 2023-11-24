@@ -87,18 +87,21 @@ HAL_StatusTypeDef sgtl5000_init(h_sgtl5000_t * h_sgtl5000)
 
 	/* Chip Powerup and Supply Configurations */
 
+	//--------------- Power Supply Configuration----------------
+	// NOTE: This next 2 Write calls is needed ONLY if VDDD is
 	// Configure VDDD level to 1.8V (bits 3:0)
 	// Write CHIP_LINREG_CTRL 0x????
-	// TODO
-
+	// OK, pas touche!
 	// Power up internal linear regulator (Set bit 9)
 	// Write CHIP_ANA_POWER 0x7260
-	// TODO is it necessary?
+	// Pas touche non plus
 
 	// NOTE: This next Write call is needed ONLY if VDDD is
 	// externally driven
 	// Turn off startup power supplies to save power (Clear bit 12 and 13)
 	// Write CHIP_ANA_POWER 0x4260
+	uint16_t clear_mask = ~((1 << 12) | (1 << 13));
+	sgtl5000_i2c_clear_bit(h_sgtl5000, SGTL5000_CHIP_ANA_POWER, clear_mask);
 
 	// NOTE: The next Write calls is needed only if both VDDA and
 	// VDDIO power supplies are less than 3.1V.
@@ -106,13 +109,15 @@ HAL_StatusTypeDef sgtl5000_init(h_sgtl5000_t * h_sgtl5000)
 	// Write CHIP_CLK_TOP_CTRL 0x0800
 	// Enable charge pump (Set bit 11)
 	// Write CHIP_ANA_POWER 0x4A60
-	// TODO VDDA and VDDIO = 3.3V so not necessary
+	// VDDA and VDDIO = 3.3V so not necessary
 
 	// NOTE: The next modify call is only needed if both VDDA and
 	// VDDIO are greater than 3.1 V
 	// Configure the charge pump to use the VDDIO rail (set bit 5 and bit 6)
 	// Write CHIP_LINREG_CTRL 0x006C
 	// TODO VDDA and VDDIO = 3.3V so it IS necessary
+	uint16_t set_mask = (1 << 5) | (1 << 6);
+	sgtl5000_i2c_set_bit(h_sgtl5000, SGTL5000_CHIP_LINREG_CTRL, set_mask);
 
 	//---- Reference Voltage and Bias Current Configuration----
 	// NOTE: The value written in the next 2 Write calls is dependent
