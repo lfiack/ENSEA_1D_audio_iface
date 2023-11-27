@@ -79,7 +79,7 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 	{
 		cplt_counter++;
 		// TODO Temp juste pour voir
-		HAL_SAI_DMAStop(&hsai_BlockA2);
+		//		HAL_SAI_DMAStop(&hsai_BlockA2);
 	}
 }
 
@@ -225,6 +225,8 @@ int main(void)
 	h_sgtl5000.hi2c = &hi2c2;
 	h_sgtl5000.dev_address = sgtl_address;
 
+	sgtl5000_init(&h_sgtl5000);
+
 	HAL_StatusTypeDef ret;
 	ret = sgtl5000_i2c_read_register(&h_sgtl5000, SGTL5000_CHIP_ID, &data);
 
@@ -235,25 +237,7 @@ int main(void)
 		Error_Handler();
 	}
 
-	printf("data = 0x%04X\r\n", data);
-
-	ret = sgtl5000_i2c_read_register(&h_sgtl5000, SGTL5000_CHIP_DIG_POWER, &data);
-	printf("ret = %d Before : SGTL5000_CHIP_DIG_POWER = 0x%04x\r\n", ret, data);
-
-	ret = sgtl5000_i2c_clear_bit(&h_sgtl5000, SGTL5000_CHIP_DIG_POWER, 0xFFFE);
-//	ret = sgtl5000_i2c_write_register(&h_sgtl5000, SGTL5000_CHIP_DIG_POWER, 3);
-
-	printf("ret = %d\r\n", ret);
-	ret = sgtl5000_i2c_read_register(&h_sgtl5000, SGTL5000_CHIP_DIG_POWER, &data);
-	printf("ret = %d After : SGTL5000_CHIP_DIG_POWER = 0x%04x\r\n", ret, data);
-
-
-	HAL_Delay(100);
-
-	printf("Temp infinite loop\r\n");
-	for(;;);
-
-#define SAI_TX_BUFFER_LENGTH (48*2)
+#define SAI_TX_BUFFER_LENGTH (480*2)
 	static uint16_t sai_tx_buffer[SAI_TX_BUFFER_LENGTH];
 
 	for (int i = 0 ; i < SAI_TX_BUFFER_LENGTH ; i++)

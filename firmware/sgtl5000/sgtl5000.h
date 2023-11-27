@@ -76,4 +76,7 @@ HAL_StatusTypeDef sgtl5000_i2c_write_register(h_sgtl5000_t * h_sgtl5000, sgtl500
 HAL_StatusTypeDef sgtl5000_i2c_set_bit(h_sgtl5000_t * h_sgtl5000, sgtl5000_registers_t reg_address, uint16_t set_mask);
 HAL_StatusTypeDef sgtl5000_i2c_clear_bit(h_sgtl5000_t * h_sgtl5000, sgtl5000_registers_t reg_address, uint16_t clear_mask);
 
+HAL_StatusTypeDef sgtl5000_init(h_sgtl5000_t * h_sgtl5000);
+
+
 #endif /* SGTL5000_SGTL5000_H_ */
