@@ -41,7 +41,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SAI_BUFFER_LENGTH 64
+#define SAI_TX_BUFFER_LENGTH (48*2)
+#define SAI_RX_BUFFER_LENGTH (48*2)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,7 +54,8 @@
 
 /* USER CODE BEGIN PV */
 h_vu_t h_vu;
-uint8_t dummy_sai_buffer[SAI_BUFFER_LENGTH];
+static int16_t sai_tx_buffer[SAI_TX_BUFFER_LENGTH];
+static int16_t sai_rx_buffer[SAI_RX_BUFFER_LENGTH];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,23 +74,54 @@ int _write(int file, char *ptr, int len)
 	return len;
 }
 
-static int cplt_counter = 0;
+static int tx_cplt_counter = 0;
 void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	if (SAI2_Block_A == hsai->Instance)
 	{
-		cplt_counter++;
+		tx_cplt_counter++;
 		// TODO Temp juste pour voir
-		//		HAL_SAI_DMAStop(&hsai_BlockA2);
+		//HAL_SAI_DMAStop(&hsai_BlockA2);
 	}
 }
 
-static int half_cplt_counter = 0;
+static int tx_half_cplt_counter = 0;
 void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	if (SAI2_Block_A == hsai->Instance)
 	{
-		half_cplt_counter++;
+		tx_half_cplt_counter++;
+	}
+}
+
+static int rx_cplt_counter = 0;
+void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	if (SAI2_Block_B == hsai->Instance)
+	{
+		for (int i = SAI_RX_BUFFER_LENGTH / 2 ; i < SAI_RX_BUFFER_LENGTH ; i++)
+		{
+			sai_tx_buffer[i] = sai_rx_buffer[i];
+		}
+
+		// TODO Temp juste pour voir
+		//HAL_SAI_DMAStop(&hsai_BlockB2);
+
+		rx_cplt_counter++;
+	}
+}
+
+static int rx_half_cplt_counter = 0;
+void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	if (SAI2_Block_B == hsai->Instance)
+	{
+		for (int i = 0 ; i < SAI_RX_BUFFER_LENGTH / 2 ; i++)
+		{
+			sai_tx_buffer[i] = sai_rx_buffer[i];
+		}
+
+		rx_half_cplt_counter++;
 	}
 }
 /* USER CODE END 0 */
@@ -149,40 +182,6 @@ int main(void)
 	 * FS = PLLSAI1P / 256 = 47.79MHz
 	 */
 
-	// Il faudrait trouver une solution pour sortir une clock sans démarrer de transmit...
-
-	/**
-	 * Pour faire passer l'I2S dans le DAP (en vrai on s'en fout du DAP)
-	 * SSS_CTRL->DAP_SELECT to 0x1 (selects I2S_IN)
-	 * SSS_CTRL->DAC_SELECT to 0x3 (selects DAP output)
-	 *
-	 * On commence par un test I2S -> DAC Line output
-	 * On ignore donc la partie "ANALOG INPUT BLOCK"
-	 * Et on commence par "ANALOG OUTPUTS"
-	 * On ne s'intéresse pas non plus à la sortie Headphone
-	 *
-	 * Routage + gain analogique :
-	 * CHIP_DAC_VOL
-	 * CHIP_LINE_OUT_VOL
-	 * CHIP_ANA_CTRL->MUTE_LO
-	 *
-	 * Digital input :
-	 * CHIP_I2S_CTRL
-	 * CHIP_I2S_CTRL->LRPOL
-	 * I2S_LRCLK et I2S_SCLK en slave (c'est le STM32 le Master)
-	 * -> Synchrone vis à vis de SYS_MCLK, ça devrait être le cas dans le SAI
-	 *
-	 */
-
-
-	// Starts SAI to hopefully get MCLK
-	//	if (HAL_SAI_Transmit_DMA(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH) != HAL_OK)
-	//	{
-	//		Error_Handler();
-	//	}
-
-	//	HAL_SAI_Transmit(&hsai_BlockA2, dummy_sai_buffer, SAI_BUFFER_LENGTH, HAL_MAX_DELAY);
-
 	// Starts MCLK but not the LR clock and other signals
 	__HAL_SAI_ENABLE(&hsai_BlockA2);
 
@@ -204,23 +203,6 @@ int main(void)
 	uint16_t sgtl_address = 0x14;
 	uint16_t data;
 
-	/**
-	 * Example I2C read
-	 * • Start condition
-	 * • Device address with the R/W bit cleared to indicate write
-	 * • Send two bytes for the 16 bit register address (most significant byte first)
-	 * • Stop Condition followed by start condition (or a single restart condition)
-	 * • Device address with the R/W bit set to indicate read
-	 * • Read two bytes from the addressed register (most significant byte first)
-	 * • Stop condition
-	 */
-
-	/**
-	 * Registers Page 31
-	 * CHIP_ID 16 bits
-	 * 0xA0HH (0xHH - revision number)
-	 */
-
 	h_sgtl5000_t h_sgtl5000;
 	h_sgtl5000.hi2c = &hi2c2;
 	h_sgtl5000.dev_address = sgtl_address;
@@ -232,13 +214,9 @@ int main(void)
 
 	if (ret != HAL_OK)
 	{
-		// Pour l'instant on a un ACK Failure -> C'est réglé!
 		printf("HAL_I2C_Mem_Read error\r\n");
 		Error_Handler();
 	}
-
-#define SAI_TX_BUFFER_LENGTH (480*2)
-	static uint16_t sai_tx_buffer[SAI_TX_BUFFER_LENGTH];
 
 	for (int i = 0 ; i < SAI_TX_BUFFER_LENGTH ; i++)
 	{
@@ -248,7 +226,9 @@ int main(void)
 
 	printf("Starting SAI...\r\n");
 	// Last parameter is the number of DMA CYCLES (here a cycle is 16 bits/2Bytes)
+	HAL_SAI_Receive_DMA(&hsai_BlockB2, (uint8_t*) sai_rx_buffer, SAI_RX_BUFFER_LENGTH);
 	HAL_SAI_Transmit_DMA(&hsai_BlockA2, (uint8_t*) sai_tx_buffer, SAI_TX_BUFFER_LENGTH);
+
 	/*
 	 * Channels are interleaved in the buffer
 	 * Bit LR indicate Left/Right Channel
