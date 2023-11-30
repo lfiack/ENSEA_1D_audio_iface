@@ -75,6 +75,24 @@ int vu_led(h_vu_t * h_vu, uint8_t port, uint8_t led, uint8_t state)
 	return 0;
 }
 
+int vu_percent(h_vu_t * h_vu, uint8_t port, uint8_t percent)
+{
+	uint8_t led_max = ((uint16_t)(percent) * 8) / 100;
+	if (led_max >= 8) led_max = 8;
+
+	for (int i = 0 ; i < 8 ; i++)
+	{
+		vu_led(h_vu, port, i, 0);
+	}
+
+	for (int i = 0 ; i < led_max ; i++)
+	{
+		vu_led(h_vu, port, i, 1);
+	}
+
+	return 0;
+}
+
 int vu_blink(h_vu_t * h_vu)
 {
 	for (int j = 0 ; j < 2 ; j++)

@@ -23,7 +23,7 @@
 #include "sai.h"
 #include "spi.h"
 #include "usart.h"
-#include "usb_otg.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -94,11 +94,14 @@ void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 	}
 }
 
+static int rx_cplt_flag = 0;
 static int rx_cplt_counter = 0;
 void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	if (SAI2_Block_B == hsai->Instance)
 	{
+		rx_cplt_flag = 1;
+
 		for (int i = SAI_RX_BUFFER_LENGTH / 2 ; i < SAI_RX_BUFFER_LENGTH ; i++)
 		{
 			sai_tx_buffer[i] = sai_rx_buffer[i];
@@ -111,11 +114,14 @@ void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 	}
 }
 
+static int rx_half_cplt_flag = 0;
 static int rx_half_cplt_counter = 0;
 void HAL_SAI_RxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
 	if (SAI2_Block_B == hsai->Instance)
 	{
+		rx_half_cplt_flag = 1;
+
 		for (int i = 0 ; i < SAI_RX_BUFFER_LENGTH / 2 ; i++)
 		{
 			sai_tx_buffer[i] = sai_rx_buffer[i];
@@ -159,11 +165,11 @@ int main(void)
 	MX_GPIO_Init();
 	MX_DMA_Init();
 	MX_USART2_UART_Init();
-	MX_USB_OTG_FS_PCD_Init();
 	MX_I2C2_Init();
 	MX_SAI2_Init();
 	MX_SPI3_Init();
 	MX_USART1_UART_Init();
+	MX_USB_DEVICE_Init();
 	/* USER CODE BEGIN 2 */
 
 	/* USER CODE END 2 */
@@ -237,10 +243,32 @@ int main(void)
 	 * (SGTL DIN is shifted by 1 bit on the right on the oscilloscope, it's normal for an SAI apparently)
 	 */
 
+	int ave_counter = 0;
+	int ave = 0;
+	int ave_max = 100;
+
 	while (1)
 	{
-		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-		HAL_Delay(100);
+		if (rx_cplt_flag)
+		{
+			rx_cplt_flag = 0;
+
+			ave += sai_rx_buffer[0];
+			ave_counter++;
+
+			if (ave_counter == ave_max)
+			{
+
+				ave /= ave_max;
+				if (ave < 0) ave = -ave;
+
+				vu_percent(&h_vu, VU_PORTA, ave/5);
+				vu_percent(&h_vu, VU_PORTB, ave/5);
+
+				ave = 0;
+				ave_counter = 0;
+			}
+		}
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

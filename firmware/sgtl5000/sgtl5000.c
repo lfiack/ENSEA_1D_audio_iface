@@ -208,6 +208,7 @@ HAL_StatusTypeDef sgtl5000_init(h_sgtl5000_t * h_sgtl5000)
 	// Enable Zero-cross detect if needed for HP_OUT (bit 5) and ADC (bit 1)
 	// Write CHIP_ANA_CTRL 0x0133
 	mask = 0x0004;	// Unmute all + SELECT_ADC = LINEIN
+//	mask = 0x0000;	// Unmute all + SELECT_ADC = MIC
 	sgtl5000_i2c_write_register(h_sgtl5000, SGTL5000_CHIP_ANA_CTRL, mask);
 
 	//------------Power up Inputs/Outputs/Digital Blocks---------
@@ -255,21 +256,26 @@ HAL_StatusTypeDef sgtl5000_init(h_sgtl5000_t * h_sgtl5000)
 
 	/* Input/Output Routing */
 	// Laissons tout par défaut pour l'instant
+//	mask = 0x0000;	// ADC -> DAC
+//	sgtl5000_i2c_write_register(h_sgtl5000, SGTL5000_CHIP_SSS_CTRL, mask);
 
 	/* Le reste */
 	mask = 0x0000;	// Unmute
 	sgtl5000_i2c_write_register(h_sgtl5000, SGTL5000_CHIP_ADCDAC_CTRL, mask);
 
-//	mask = 0x3C3C;
-	mask = 0x4747;
+	mask = 0x3C3C;
+//	mask = 0x4747;
 	sgtl5000_i2c_write_register(h_sgtl5000, SGTL5000_CHIP_DAC_VOL, mask);
 
-	for (int i = 0 ; register_map[i] != SGTL5000_DAP_COEF_WR_A2_LSB ; i++)
-	{
-		uint16_t reg = 0;
-		sgtl5000_i2c_read_register(h_sgtl5000, register_map[i], &reg);
-		printf("%02d: [0x%04x] = 0x%04x\r\n", i, register_map[i], reg);
-	}
+	mask = 0x0251;	// BIAS_RESISTOR = 2, BIAS_VOLT = 5, GAIN = 1
+	sgtl5000_i2c_write_register(h_sgtl5000, SGTL5000_CHIP_MIC_CTRL, mask);
+
+//	for (int i = 0 ; register_map[i] != SGTL5000_DAP_COEF_WR_A2_LSB ; i++)
+//	{
+//		uint16_t reg = 0;
+//		sgtl5000_i2c_read_register(h_sgtl5000, register_map[i], &reg);
+//		printf("%02d: [0x%04x] = 0x%04x\r\n", i, register_map[i], reg);
+//	}
 
 	return ret;
 }

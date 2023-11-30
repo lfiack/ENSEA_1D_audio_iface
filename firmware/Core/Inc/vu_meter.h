@@ -29,6 +29,7 @@ typedef struct h_vu_struct
 
 int vu_init(h_vu_t * h_vu, SPI_HandleTypeDef * hspi);
 int vu_led(h_vu_t * h_vu, uint8_t port, uint8_t led, uint8_t state);
+int vu_percent(h_vu_t * h_vu, uint8_t port, uint8_t percent);
 int vu_blink(h_vu_t * h_vu);
 void vu_blink_red(h_vu_t * h_vu);
 
